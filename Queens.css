@@ -1,0 +1,205 @@
+*{
+    box-sizing: border-box;
+
+    font-family: system-ui;
+    font-weight: 700;
+
+    border: none;
+}
+
+:root{
+    --LightPurple: #7F5AA3;
+    ---DeepPurple: #441E6B;
+    --SoftLilac: #E4D6F2;
+
+    --LargeFontSize: min(6dvw, 6dvh);
+    --MediumFontSize: min(3dvw, 3dvh);
+    --SmallFontSize: min(2dvw, 2dvh);
+}
+
+body{
+    width: 100dvw;
+    height: 100dvh;
+    border: none;
+    margin: 0;
+
+    display: grid;
+
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+
+    justify-items: center;
+    align-items: center;
+
+    background-color: var(--SoftLilac);
+}
+
+#Board{
+    display: grid;
+
+    width: min(80dvh, 80dvw);
+    height: min(80dvh, 80dvw);
+    
+    grid-row: 1;
+    grid-column: 1;
+
+    border-radius: 5%;
+
+    outline: 5px solid black;
+
+    overflow: clip;
+}
+
+.cell  {
+    border: 1px solid black;
+
+    display: grid;
+
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+
+    justify-items: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    transition: all ease 0.5s;
+}
+
+[data-clickState="1"]{
+    padding: 10%;
+    content: url(Cross.svg);
+}
+
+[data-clickState="2"]{
+    padding: 20%;
+    content: url(Queen.svg);
+
+    animation-duration: 1s;
+}
+
+@keyframes QueenBounce {
+    0%{
+        padding: 20%;
+    }
+
+    45% {
+        padding: 5%;
+    }
+
+    55% {
+        padding: 5%;
+    }
+
+    100% {
+        padding: 20%;
+    }
+}
+
+#NewGameMenu{
+    width: min(90dvh, 90dvw);
+    height: min(90dvh, 90dvw);
+
+    grid-row: 1;
+    grid-column: 1;
+
+    z-index: 3;
+
+    border-radius: 5%;
+
+    background-image: linear-gradient(var(--LightPurple), var(---DeepPurple));
+
+    display: grid;
+
+    padding-top: 15%; 
+    padding-bottom: 15%; 
+
+    grid-template-rows: 20% 45% 35%;
+    grid-template-columns: 100%;
+
+    justify-items: center;
+    align-items: center;
+}
+
+#NewGameMenu img{
+    object-fit: contain;
+
+    width: 100%;
+    height: 100%;
+}
+
+#NewGameMenu h2, #NewGameMenu h3{
+    color: white;
+
+    text-align: center;
+}
+
+#NewGameMenu h2 {
+    font-size: xxx-large;
+    font-size: var(--LargeFontSize);
+}
+
+#NewGameMenu h3 {
+    font-size: xx-large;
+    font-size: var(--MediumFontSize);
+}
+
+#NewGameMenu div:nth-of-type(2){
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 60%;
+    justify-content: space-around;
+}
+
+#BoardSizeInput{
+    display: flex;
+    justify-content: space-around;
+    height: 40%;
+}
+
+#BoardSizeInputUp, #BoardSizeInputDown{
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    height: 100%;
+
+    font-size: xx-large;
+    font-size: var(--MediumFontSize);
+
+    outline: none;
+
+    position: relative;
+}
+
+#BoardSizeInputUp span, #BoardSizeInputDown span{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#BoardSizeInputDisplay{
+    background-color: white;
+    border-radius: 50px;
+
+    width: 60%;
+
+    display: grid;
+
+    justify-items: center;
+    align-items: center;
+
+    font-size: x-large;
+    font-size: var(--SmallFontSize);
+}
+
+#NewGameButton{
+    height: 40%;
+    border-radius: 50px;
+
+    font-size: xx-large;
+    font-size: var(--MediumFontSize);
+}
