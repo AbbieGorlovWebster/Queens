@@ -112,8 +112,8 @@ body{
 
     display: grid;
 
-    padding-top: 15%; 
-    padding-bottom: 15%; 
+    padding-top: min(15dvh, 15dvw);; 
+    padding-bottom: min(15dvh, 15dvw);; 
 
     grid-template-rows: 20% 45% 35%;
     grid-template-columns: 100%;
