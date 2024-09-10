@@ -8,6 +8,9 @@ var boardSize = 8;
 //timestamp when game begins
 var startTimeStamp = 0;
 
+//Random Number generator
+var randomNumberGenerator;
+
 //Get Menu Elements
 const newGameMenu = document.getElementById("NewGameMenu");
 const topText = document.getElementById("TopText");
@@ -16,6 +19,7 @@ const boardSizeUpButton = document.getElementById("BoardSizeInputUp");
 const boardSizeDisplay = document.getElementById("BoardSizeInputDisplay");
 const boardSizeDownButton = document.getElementById("BoardSizeInputDown");
 const newGameButton = document.getElementById("NewGameButton");
+const seedInput = document.getElementById("Seed");
 
 //Initialise
 boardSizeDisplay.innerHTML = "Board Size: " + boardSize;
@@ -76,7 +80,7 @@ function AssignQueens(fullCoordList, queenTotal){
 
     for(let queenCount = 0; queenCount < queenTotal; queenCount++){
         //Pick random allowed coordinate for queen
-        const queenCoord = availableCoordList[Math.floor(Math.random() * availableCoordList.length)];
+        const queenCoord = availableCoordList[Math.floor(randomNumberGenerator.next() * availableCoordList.length)];
         queenArray.push(queenCoord);
 
         //Remove Incompatable Coords From Array
@@ -112,7 +116,7 @@ function AssignBoardAreas(allQueenCoords, areaTotal){
 
     //Assign Size to each area
     for (let areaCount = 0; areaCount < areaTotal - 1; areaCount++){
-        const newAreaSize = Math.floor((Math.random() * (Math.min(areaLimit, remainingCells) - 1)) + 1);
+        const newAreaSize = Math.floor((randomNumberGenerator.next() * (Math.min(areaLimit, remainingCells) - 1)) + 1);
 
         remainingCells -= newAreaSize;
         areaSizes.push(newAreaSize);
@@ -144,7 +148,7 @@ function AssignBoardAreas(allQueenCoords, areaTotal){
         for(let stepsTaken = 0; stepsTaken < areaSizes[areaCount]; stepsTaken++){
 
             //Pick a random direction
-            let direction = Math.floor(Math.random() * 4);
+            let direction = Math.floor(randomNumberGenerator.next() * 4);
 
             let newCoord = Array.from(currentCoord);
 
@@ -259,7 +263,7 @@ function AssignBoardAreas(allQueenCoords, areaTotal){
 
             if(possibleGroups.length > 0){
                 let cellData = gameBoard[cell[0]][cell[1]];
-                cellData.groupID = possibleGroups[Math.floor(Math.random() * possibleGroups.length)];
+                cellData.groupID = possibleGroups[Math.floor(randomNumberGenerator.next() * possibleGroups.length)];
 
                 gameBoard[cell[0]][cell[1]] = cellData;
 
@@ -314,9 +318,9 @@ function colorGenerator(number){
 
     for(let pointCounter = 0; pointCounter < number; pointCounter++){
 
-        let R = (Math.random()*255);
-        let G = (Math.random()*255);
-        let B = (Math.random()*255);
+        let R = (randomNumberGenerator.next()*255);
+        let G = (randomNumberGenerator.next()*255);
+        let B = (randomNumberGenerator.next()*255);
 
         colorArray[pointCounter] = [R, G, B];
     }
@@ -325,6 +329,13 @@ function colorGenerator(number){
 }
 
 function createBoard(boardWidth){
+    if(seedInput.value){
+        randomNumberGenerator = new SeededPRNG(seedInput.value);
+    } else {
+        randomNumberGenerator = new SeededPRNG(Date.now());
+    }
+
+
     let coordsArray = InitialiseBoard(boardWidth);
 
     let queensCoords = AssignQueens(coordsArray, boardWidth);
@@ -414,4 +425,24 @@ function gameDuration(){
     }    
 
     return output;
+}
+
+//Seeded PRNG
+class SeededPRNG{
+    constructor(seed){
+        seed = Number(seed);
+        const seedLength = Math.floor(String(seed).length / 3);
+        
+        this.s1 = (171 * String(seed).substring(0, seedLength)) % 30269;
+        this.s2 = (172 * String(seed).substring(seedLength, seedLength * 2)) % 30269;
+        this.s3 = (170 * String(seed).substring(seedLength * 2, String(seed).length)) % 30269;
+    }
+
+    next(){
+        this.s1 = (171 * this.s1) % 30269;
+        this.s2 = (172 * this.s2) % 30269;
+        this.s3 = (170 * this.s3) % 30269;
+
+        return ((this.s1 / 30269) + (this.s2 / 30307) + (this.s3 / 30323)) % 1;
+    }
 }

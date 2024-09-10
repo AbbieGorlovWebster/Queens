@@ -1,205 +1,217 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 
-    font-family: system-ui;
-    font-weight: 700;
+  font-family: system-ui;
+  font-weight: 700;
 
-    border: none;
+  border: none;
 }
 
-:root{
-    --LightPurple: #7F5AA3;
-    ---DeepPurple: #441E6B;
-    --SoftLilac: #E4D6F2;
+:root {
+  --LightPurple: #7f5aa3;
+  ---DeepPurple: #441e6b;
+  --SoftLilac: #e4d6f2;
 
-    --LargeFontSize: min(6dvw, 6dvh);
-    --MediumFontSize: min(3dvw, 3dvh);
-    --SmallFontSize: min(2dvw, 2dvh);
+  --LargeFontSize: min(6dvw, 6dvh);
+  --MediumFontSize: min(3dvw, 3dvh);
+  --SmallFontSize: min(2dvw, 2dvh);
 }
 
-body{
-    width: 100dvw;
-    height: 100dvh;
-    border: none;
-    margin: 0;
+body {
+  width: 100dvw;
+  height: 100dvh;
+  border: none;
+  margin: 0;
 
-    display: grid;
+  display: grid;
 
-    grid-template-rows: 100%;
-    grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
 
-    justify-items: center;
-    align-items: center;
+  justify-items: center;
+  align-items: center;
 
-    background-color: var(--SoftLilac);
+  background-color: var(--SoftLilac);
 }
 
-#Board{
-    display: grid;
+#Board {
+  display: grid;
 
-    width: min(80dvh, 80dvw);
-    height: min(80dvh, 80dvw);
-    
-    grid-row: 1;
-    grid-column: 1;
+  width: min(80dvh, 80dvw);
+  height: min(80dvh, 80dvw);
 
-    border-radius: 5%;
+  grid-row: 1;
+  grid-column: 1;
 
-    outline: 5px solid black;
+  border-radius: 5%;
 
-    overflow: clip;
+  outline: 5px solid black;
+
+  overflow: clip;
 }
 
-.cell  {
-    border: 1px solid black;
+.cell {
+  border: 1px solid black;
 
-    display: grid;
+  display: grid;
 
-    grid-template-rows: 100%;
-    grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
 
-    justify-items: center;
-    align-items: center;
+  justify-items: center;
+  align-items: center;
 
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    transition: all ease 0.5s;
+  transition: all ease 0.5s;
 }
 
-[data-clickState="1"]{
-    padding: 10%;
-    content: url(Cross.svg);
+[data-clickState="1"] {
+  padding: 10%;
+  content: url(Cross.svg);
 }
 
-[data-clickState="2"]{
-    padding: 20%;
-    content: url(Queen.svg);
+[data-clickState="2"] {
+  padding: 20%;
+  content: url(Queen.svg);
 
-    animation-duration: 1s;
+  animation-duration: 1s;
 }
 
 @keyframes QueenBounce {
-    0%{
-        padding: 20%;
-    }
+  0% {
+    padding: 20%;
+  }
 
-    45% {
-        padding: 5%;
-    }
+  45% {
+    padding: 5%;
+  }
 
-    55% {
-        padding: 5%;
-    }
+  55% {
+    padding: 5%;
+  }
 
-    100% {
-        padding: 20%;
-    }
+  100% {
+    padding: 20%;
+  }
 }
 
-#NewGameMenu{
-    width: min(90dvh, 90dvw);
-    height: min(90dvh, 90dvw);
+#NewGameMenu {
+  width: min(90dvh, 90dvw);
+  height: min(90dvh, 90dvw);
 
-    grid-row: 1;
-    grid-column: 1;
+  grid-row: 1;
+  grid-column: 1;
 
-    z-index: 3;
+  z-index: 3;
 
-    border-radius: 5%;
+  border-radius: 5%;
 
-    background-image: linear-gradient(var(--LightPurple), var(---DeepPurple));
+  background-image: linear-gradient(var(--LightPurple), var(---DeepPurple));
 
-    display: grid;
+  display: grid;
 
-    padding-top: min(15dvh, 15dvw);; 
-    padding-bottom: min(15dvh, 15dvw);; 
+  padding-top: min(10dvh, 10dvw);
+  padding-bottom: min(10dvh, 10dvw);
 
-    grid-template-rows: 20% 45% 35%;
-    grid-template-columns: 100%;
+  grid-template-rows: 20% 35% 45%;
+  grid-template-columns: 100%;
 
-    justify-items: center;
-    align-items: center;
+  justify-items: center;
+  align-items: center;
 }
 
-#NewGameMenu img{
-    object-fit: contain;
+#NewGameMenu img {
+  object-fit: contain;
 
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
-#NewGameMenu h2, #NewGameMenu h3{
-    color: white;
+#NewGameMenu h2,
+#NewGameMenu h3 {
+  color: white;
 
-    text-align: center;
+  text-align: center;
 }
 
 #NewGameMenu h2 {
-    font-size: xxx-large;
-    font-size: var(--LargeFontSize);
+  font-size: xxx-large;
+  font-size: var(--LargeFontSize);
+
+  margin-bottom: 0;
 }
 
 #NewGameMenu h3 {
-    font-size: xx-large;
-    font-size: var(--MediumFontSize);
+  font-size: xx-large;
+  font-size: var(--MediumFontSize);
+
+  margin-top: 2dvh;
 }
 
-#NewGameMenu div:nth-of-type(2){
-    display: flex;
-    flex-direction: column;
+#NewGameMenu div:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
 
-    height: 100%;
-    width: 60%;
-    justify-content: space-around;
+  height: 100%;
+  width: 60%;
+  justify-content: space-around;
 }
 
-#BoardSizeInput{
-    display: flex;
-    justify-content: space-around;
-    height: 40%;
+#BoardSizeInput {
+  display: flex;
+  justify-content: space-around;
+  height: 40%;
 }
 
-#BoardSizeInputUp, #BoardSizeInputDown{
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    height: 100%;
+#BoardSizeInputUp,
+#BoardSizeInputDown {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  height: 100%;
 
-    font-size: xx-large;
-    font-size: var(--MediumFontSize);
+  font-size: xx-large;
+  font-size: var(--MediumFontSize);
 
-    outline: none;
+  outline: none;
 
-    position: relative;
+  position: relative;
 }
 
-#BoardSizeInputUp span, #BoardSizeInputDown span{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#BoardSizeInputUp span,
+#BoardSizeInputDown span {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#BoardSizeInputDisplay{
-    background-color: white;
-    border-radius: 50px;
+#BoardSizeInputDisplay {
+  background-color: white;
+  border-radius: 50px;
 
-    width: 60%;
+  width: 60%;
 
-    display: grid;
+  display: grid;
 
-    justify-items: center;
-    align-items: center;
+  justify-items: center;
+  align-items: center;
 
-    font-size: x-large;
-    font-size: var(--SmallFontSize);
+  font-size: x-large;
+  font-size: var(--SmallFontSize);
 }
 
-#NewGameButton{
-    height: 40%;
-    border-radius: 50px;
+#NewGameButton,
+#Seed {
+  height: 40%;
+  border-radius: 50px;
 
-    font-size: xx-large;
-    font-size: var(--MediumFontSize);
+  font-size: xx-large;
+  font-size: var(--MediumFontSize);
+
+  margin-top: 2%;
+
+  text-align: center;
 }
